@@ -5,6 +5,7 @@ from scim_sim.users import remove_user
 
 def generate_group_payload(display_name):
     return {
+        "schemas": ["urn:ietf:params:scim:schemas:core:2.0:Group"],
         "displayName": display_name,
         "members": []
     }
@@ -35,8 +36,7 @@ def delete_group(group_id):
         "Content-Type": "application/json"
     }
 
-    response = make_request('GET', f"{config['SCIM_BASE_URL']}/Groups/{group_id}",
-                            headers=headers)
+    response = make_request('GET', f"{config['SCIM_BASE_URL']}/Groups/{group_id}", headers=headers)
     if 200 <= response.status_code < 300:
         members = response.json().get("members") or []
 
@@ -96,8 +96,7 @@ def remove_user_from_group(user_id, group_id):
         "Content-Type": "application/json"
     }
 
-    response = make_request('GET', f"{config['SCIM_BASE_URL']}/Groups/{group_id}",
-                            headers=headers)
+    response = make_request('GET', f"{config['SCIM_BASE_URL']}/Groups/{group_id}", headers=headers)
     if response.status_code != 200:
         print(f"❌ Failed to fetch group details: {response.text}")
         return False

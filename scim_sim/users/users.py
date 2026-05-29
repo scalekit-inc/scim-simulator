@@ -1,6 +1,5 @@
 import random
 import string
-
 from faker import Faker
 
 from scim_sim.client import make_request
@@ -10,7 +9,9 @@ fake = Faker()
 
 
 def generate_random_payload():
+    email = fake.email()
     return {
+        "schemas": ["urn:ietf:params:scim:schemas:core:2.0:User"],
         "active": True,
         "name": {
             "givenName": fake.first_name(),
@@ -20,8 +21,9 @@ def generate_random_payload():
             "honorificPrefix": fake.prefix(),
             "honorificSuffix": fake.suffix()
         },
+        "emails": [{"value": email, "primary": True}],
         "nickName": ''.join(random.choices(string.ascii_uppercase, k=12)),
-        "userName": fake.email(),
+        "userName": email,
         "userType": ''.join(random.choices(string.ascii_uppercase, k=12))
     }
 

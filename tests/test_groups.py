@@ -1,7 +1,7 @@
 import json
 from unittest.mock import MagicMock, patch
 
-import scim_sim.groups as groups
+import scim_sim.groups.groups as groups
 
 CONFIG = {"SCIM_BASE_URL": "https://scim.example.com", "SCIM_AUTH_TOKEN": "token123"}
 BASE_URL = CONFIG["SCIM_BASE_URL"]
