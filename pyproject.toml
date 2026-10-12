@@ -4,13 +4,13 @@ build-backend = "hatchling.build"
 
 [project]
 name = "scim-sim"
-version = "0.0.1"
+version = "0.2.0"
 authors = [
     { name = "Your Name", email = "avinashmkamath@gmail.com" },
 ]
 description = "A SCIM directory simulator and management tool"
 readme = "README.md"
-requires-python = ">=3.6"
+requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -29,9 +29,12 @@ dependencies = [
 [project.scripts]
 scim-sim = "scim_sim.cli:main"
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
     "pytest>=7.0.0",
     "black>=22.0.0",
     "flake8>=4.0.0",
-] 
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
